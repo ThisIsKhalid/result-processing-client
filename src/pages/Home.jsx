@@ -1,11 +1,37 @@
+import { Link } from "react-router-dom";
 
 
 const Home = () => {
     return (
-      <div>
-        <h1 className="text-xl text-red-600 border border-solid">
-          Hello world
-        </h1>
+      <div className="w-full h-screen flex items-center justify-center text-center bg-slate-100 homebg relative">
+        <div className="w-full h-full bg-black/50 absolute top-0 left-0"></div>
+        <div className="z-50">
+          <h1 className="text-5xl font-bold uppercase text-[#F29228] bg-gray-950 py-3 px-3 rounded-lg ">
+            Information and Communication Engineering
+          </h1>
+          <p className="text-xl mt-5 text-gray-300 inline-block bg-gray-950 py-2 px-5 rounded-lg ">
+            University of{" "}
+            <span className="font-semibold uppercase">Rajshahi</span>
+          </p>
+
+          <div className="mt-10">
+            <Link to="/dashboard">
+              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+                Dashboard
+              </button>
+            </Link>
+            <Link to="/signin">
+              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+                Sign in
+              </button>
+            </Link>
+            <Link to="/signup">
+              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+                Sign up
+              </button>
+            </Link>
+          </div>
+        </div>
       </div>
     );
 };

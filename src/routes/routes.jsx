@@ -1,15 +1,39 @@
 import { createBrowserRouter } from "react-router-dom";
-import Layout from "../layout/Layout";
+import DashboardLayout from "../layout/DashboardLayout";
+import AddCourse from "../pages/AddCourse";
+import DashboardHome from "../pages/DashboardHome";
 import Home from "../pages/Home";
+import SignIn from "../pages/SignIn";
+import SignUp from "../pages/SignUp";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout />,
+    element: <Home />,
+  },
+  {
+    path: "/home",
+    element: <Home />,
+  },
+  {
+    path: "/signin",
+    element: <SignIn />,
+  },
+  {
+    path: "/signup",
+    element: <SignUp />,
+  },
+  {
+    path: "/dashboard",
+    element: <DashboardLayout />,
     children: [
       {
-        path: "/",
-        element: <Home />,
+        path: "/dashboard",
+        element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/add-course",
+        element: <AddCourse />,
       },
     ],
   },
