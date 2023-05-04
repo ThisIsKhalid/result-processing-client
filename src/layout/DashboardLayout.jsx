@@ -5,7 +5,9 @@ const DashboardLayout = () => {
   return (
     <div className="flex">
       <Sidebar />
-      <Outlet />
+      <div className="bg-slate-100 w-full">
+        <Outlet />
+      </div>
     </div>
   );
 };

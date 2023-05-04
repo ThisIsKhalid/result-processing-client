@@ -16,17 +16,17 @@ const Home = () => {
 
           <div className="mt-10">
             <Link to="/dashboard">
-              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+              <button className="bg-gray-950 text-[#F29228] px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
                 Dashboard
               </button>
             </Link>
             <Link to="/signin">
-              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+              <button className="bg-gray-950 text-[#F29228] px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
                 Sign in
               </button>
             </Link>
             <Link to="/signup">
-              <button className="border-2 border-gray-950 hover:bg-gray-950 hover:text-[#F29228] transition-colors ease-in-out px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
+              <button className="bg-gray-950 text-[#F29228] px-7 py-4 rounded-lg mr-5 text-base font-semibold uppercase">
                 Sign up
               </button>
             </Link>
