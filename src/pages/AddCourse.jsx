@@ -106,6 +106,7 @@ const AddCourse = () => {
                   </option>
                   <option>Momin</option>
                   <option>Niloy</option>
+                  <option>none</option>
                 </select>
               </div>
               {/* section teacher b */}
@@ -126,6 +127,7 @@ const AddCourse = () => {
                   </option>
                   <option>Momin</option>
                   <option>Niloy</option>
+                  <option>none</option>
                 </select>
               </div>
               {/* Assing Mark Written */}

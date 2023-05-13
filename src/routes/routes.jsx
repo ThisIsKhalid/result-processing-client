@@ -7,6 +7,7 @@ import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
 import AddStudent from "../pages/AddStudent";
 import AddTeacher from "../pages/AddTeacher";
+import Courses from "../pages/Courses";
 
 const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-course",
         element: <AddCourse />,
+      },
+      {
+        path: "/dashboard/courses",
+        element: <Courses />,
       },
     ],
   },
