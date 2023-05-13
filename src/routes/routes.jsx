@@ -5,6 +5,8 @@ import DashboardHome from "../pages/DashboardHome";
 import Home from "../pages/Home";
 import SignIn from "../pages/SignIn";
 import SignUp from "../pages/SignUp";
+import AddStudent from "../pages/AddStudent";
+import AddTeacher from "../pages/AddTeacher";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <DashboardHome />,
+      },
+      {
+        path: "/dashboard/add-student",
+        element: <AddStudent />,
+      },
+      {
+        path: "/dashboard/add-teacher",
+        element: <AddTeacher />,
       },
       {
         path: "/dashboard/add-course",
