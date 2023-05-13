@@ -8,7 +8,7 @@ const Sidebar = () => {
       "bg-orange-400 text-white w-36 py-3 rounded-lg font-bold uppercase text-center transition-colors ease-in-out duration-300";
 
     return (
-      <section className="w-[300px] bg-gray-800 h-screen shadow-xl py-10 px-2 relative">
+      <section className="w-[300px] bg-gray-800 shadow-xl py-10 px-2 relative">
         <div className="flex flex-col justify-center items-center border-b-2 pb-5">
           <img src={boy} alt="" className="w-20 h-20 rounded-full" />
           <h3 className="text-xl text-gray-50 mt-4">Khalid Hasan</h3>
