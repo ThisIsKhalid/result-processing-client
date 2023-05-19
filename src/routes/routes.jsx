@@ -8,6 +8,7 @@ import SignUp from "../pages/SignUp";
 import AddStudent from "../pages/AddStudent";
 import AddTeacher from "../pages/AddTeacher";
 import Courses from "../pages/Courses";
+import PrivateRoute from "./privateRoutes";
 
 const router = createBrowserRouter([
   {
@@ -28,7 +29,11 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardLayout />,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout />
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard",

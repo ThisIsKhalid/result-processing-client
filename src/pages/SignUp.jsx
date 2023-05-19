@@ -1,14 +1,42 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { AuthContext } from "../context/AuthProvider";
 
 const SignUp = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const handleRegister = (data, e) => {};
+  const handleRegister = (data, event) => {
+    event.preventDefault();
+    const { email, password, name } = data;
+    // ----------create user
+    createUser(email, password)
+      .then(() => {
+        // ------------update user
+        updateUserProfile({
+          displayName: name,
+        })
+          .then(() => {
+            toast.success("Welcome to Result Hub");
+            reset();
+            navigate("/");
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
+      })
+      .catch((err) => toast.error(err.message));
+  };
+
   return (
     <section className="w-full min-h-screen py-10 bg-slate-100 px-5">
       <div className="text-center">
@@ -21,11 +49,11 @@ const SignUp = () => {
       </div>
       <div className="flex items-center justify-center mt-10">
         <div className="w-96 p-7 shadow-md border border-gray-100 rounded-lg bg-gray-800">
-          <h2 className="text-xl text-center">Register</h2>
+          <h2 className="text-xl text-center text-gray-50">Register</h2>
           <form onSubmit={handleSubmit(handleRegister)}>
             <div className="form-control w-full max-w-xs">
               <label className="label">
-                <span className="label-text">Name</span>
+                <span className="label-text text-gray-50">Name</span>
               </label>
               <input
                 type="text"
@@ -35,7 +63,7 @@ const SignUp = () => {
             </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
-                <span className="label-text">Email</span>
+                <span className="label-text text-gray-50">Email</span>
               </label>
               <input
                 type="email"
@@ -50,7 +78,7 @@ const SignUp = () => {
             </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
-                <span className="label-text">Teacher ID</span>
+                <span className="label-text text-gray-50">Teacher ID</span>
               </label>
               <input
                 type="text"
@@ -65,7 +93,7 @@ const SignUp = () => {
             </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="label-text text-gray-50">Password</span>
               </label>
               <input
                 type="password"
@@ -89,12 +117,15 @@ const SignUp = () => {
               value="Register"
             />
           </form>
-          <p className="mt-5 text-center">
+          <p className="mt-5 text-center text-gray-50">
             Already have an account?{" "}
-            <Link to="/signin" className="text-secondary">
+            <Link to="/signin" className="text-blue-500">
               {" "}
               Signin
             </Link>
+          </p>
+          <p className="text-slate-300 underline text-center mt-2 text-sm">
+            <Link to="/">Back to Home</Link>
           </p>
         </div>
       </div>

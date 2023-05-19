@@ -2,9 +2,7 @@ import {
   createUserWithEmailAndPassword,
   getAuth,
   onAuthStateChanged,
-  sendEmailVerification,
   signInWithEmailAndPassword,
-  signInWithPopup,
   signOut,
   updateProfile,
 } from "firebase/auth";
@@ -14,6 +12,7 @@ import app from "../firebase/firebase.config";
 export const AuthContext = createContext();
 const auth = getAuth(app);
 
+// eslint-disable-next-line react/prop-types
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -28,23 +27,9 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const googleSignIn = (provider) => {
-    setLoading(true);
-    return signInWithPopup(auth, provider);
-  };
-
-  const githubSignIn = (provider) => {
-    setLoading(true);
-    return signInWithPopup(auth, provider);
-  };
-
   const updateUserProfile = (profile) => {
     setLoading(true);
     return updateProfile(auth.currentUser, profile);
-  };
-
-  const emailVerify = () => {
-    return sendEmailVerification(auth.currentUser);
   };
 
   const logout = () => {
@@ -67,10 +52,7 @@ const AuthProvider = ({ children }) => {
     user,
     createUser,
     updateUserProfile,
-    emailVerify,
     signIn,
-    googleSignIn,
-    githubSignIn,
     logout,
     loading,
   };
