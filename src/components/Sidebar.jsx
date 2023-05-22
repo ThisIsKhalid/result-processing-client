@@ -51,6 +51,12 @@ const Sidebar = () => {
         >
           Add course
         </NavLink>
+        <NavLink
+          to="/dashboard/add-result"
+          className={({ isActive }) => (isActive ? activeClass : pendingClass)}
+        >
+          Add New Result
+        </NavLink>
       </div>
       <div className="absolute bottom-3 left-2 flex items-center justify-between w-full text-sm">
         <button className="text-gray-200 uppercase border-b border-gray-200 pb-1">

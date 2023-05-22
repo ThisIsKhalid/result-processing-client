@@ -9,6 +9,8 @@ import AddStudent from "../pages/AddStudent";
 import AddTeacher from "../pages/AddTeacher";
 import Courses from "../pages/Courses";
 import PrivateRoute from "./privateRoutes";
+import AddNewResult from "../pages/AddNewResult";
+import ResultList from "../pages/ResultList";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +52,14 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/add-course",
         element: <AddCourse />,
+      },
+      {
+        path: "/dashboard/add-result",
+        element: <AddNewResult />,
+      },
+      {
+        path: "/dashboard/results",
+        element: <ResultList />,
       },
       {
         path: "/dashboard/courses",

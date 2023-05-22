@@ -22,7 +22,7 @@ const AddCourse = () => {
                   <span className="label-text text-sm uppercase">Course</span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("course")}
                 >
                   <option disabled selected className="text-gray-100">
@@ -43,7 +43,7 @@ const AddCourse = () => {
                   </span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("courseCode")}
                 >
                   <option disabled selected className="text-gray-100">
@@ -61,7 +61,7 @@ const AddCourse = () => {
                   <span className="label-text text-sm uppercase">Year</span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("year")}
                 >
                   <option disabled selected className="text-gray-100">
@@ -80,7 +80,7 @@ const AddCourse = () => {
                   <span className="label-text text-sm uppercase">Semister</span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("semister")}
                 >
                   <option disabled selected className="text-gray-100">
@@ -98,7 +98,7 @@ const AddCourse = () => {
                   </span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("sectionA")}
                 >
                   <option disabled selected className="text-gray-100">
@@ -117,7 +117,7 @@ const AddCourse = () => {
                   </span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("sectionB", {
                     required: true,
                   })}
@@ -205,7 +205,7 @@ const AddCourse = () => {
                   </span>
                 </label>
                 <select
-                  className="select w-full bg-gray-700 text-gray-50 text-base"
+                  className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                   {...register("credit", {
                     required: true,
                   })}
@@ -224,7 +224,7 @@ const AddCourse = () => {
               <input
                 className="btn bg-teal-400 text-base w-1/2 mt-16"
                 type="submit"
-                value="Register"
+                value="Add Course"
               />
             </div>
           </form>
