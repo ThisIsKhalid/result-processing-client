@@ -1,10 +1,12 @@
+import axios from "axios";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const AddNewResult = () => {
-  const { register: searchRegister, handleSubmit: handleSearchSubmit } =
+  const { register: searchRegister, handleSubmit: handleSearchSubmit, } =
     useForm();
-  const { register: resultRegister, handleSubmit: handleResultSubmit } =
+  const { register: resultRegister, handleSubmit: handleResultSubmit, reset } =
     useForm();
 
   const searchStudent = (data) => {
@@ -13,8 +15,22 @@ const AddNewResult = () => {
   };
 
   const saveResult = (data) => {
-    console.log("Result Form Data:", data);
-    // Additional save result logic here
+    // console.log("Result Form Data:", data);
+    const identity = {name: 'khalid', reg: '18228180534'}
+    const marksWithId = {...identity, ...data}
+    // console.log(marksWithId);
+    axios
+      .post("http://localhost:5000/v1/results/add-result", marksWithId)
+      .then((res) => {
+        // console.log(res.data.data.acknowledged);
+        if (res.data.data.acknowledged) {
+          toast.success("Marks Saved Successfully.");
+          reset();
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
@@ -162,75 +178,7 @@ const AddNewResult = () => {
                 className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
               />
               <input
-                className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold"
-                type="submit"
-                value="Save"
-              />
-            </form>
-          </div>
-        </div>
-        <div className="mb-5">
-          <div className="h-12 w-full bg-gray-700 rounded-lg flex justify-between items-center px-2 text-base text-gray-50">
-            <h2>Khalid Hasan</h2>
-            <p>18228180531</p>
-            <form
-              onSubmit={handleResultSubmit(saveResult)}
-              className="flex gap-5"
-            >
-              {/* written */}
-              <input
-                type="text"
-                placeholder="Written"
-                {...resultRegister("written", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Please enter only numbers",
-                  },
-                })}
-                className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-              />
-              {/* ct-1 */}
-              <input
-                type="text"
-                placeholder="CT-1"
-                {...resultRegister("ct1", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Please enter only numbers",
-                  },
-                })}
-                className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-              />
-              {/* ct-2 */}
-              <input
-                type="text"
-                placeholder="CT-2"
-                {...resultRegister("ct2", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Please enter only numbers",
-                  },
-                })}
-                className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-              />
-              {/* present */}
-              <input
-                type="text"
-                placeholder="Present"
-                {...resultRegister("present", {
-                  required: true,
-                  pattern: {
-                    value: /^[0-9]+$/,
-                    message: "Please enter only numbers",
-                  },
-                })}
-                className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-              />
-              <input
-                className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold"
+                className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer"
                 type="submit"
                 value="Save"
               />

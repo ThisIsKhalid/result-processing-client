@@ -8,6 +8,7 @@ const AddCourse = () => {
        formState: { errors },
      } = useForm();
      const fromSubmit = (data) => console.log(data);
+     
     return (
       <section className="py-10 px-10">
         <h1 className="text-4xl text-gray-800 font-semibold">
@@ -23,9 +24,10 @@ const AddCourse = () => {
                 </label>
                 <select
                   className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                  {...register("course")}
+                  {...register("course", { required: true })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Course
                   </option>
                   <option>Homer</option>
@@ -44,9 +46,10 @@ const AddCourse = () => {
                 </label>
                 <select
                   className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                  {...register("courseCode")}
+                  {...register("courseCode", { required: true })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Course Code
                   </option>
                   <option>419</option>
@@ -62,11 +65,14 @@ const AddCourse = () => {
                 </label>
                 <select
                   className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                  {...register("year")}
+                  {...register("year", { required: true })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Year
                   </option>
+                  <option>2016</option>
+                  <option>2017</option>
                   <option>2018</option>
                   <option>2019</option>
                   <option>2020</option>
@@ -81,13 +87,20 @@ const AddCourse = () => {
                 </label>
                 <select
                   className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                  {...register("semister")}
+                  {...register("semister", { required: true })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Semister
                   </option>
                   <option>1</option>
                   <option>2</option>
+                  <option>3</option>
+                  <option>4</option>
+                  <option>5</option>
+                  <option>6</option>
+                  <option>7</option>
+                  <option>8</option>
                 </select>
               </div>
               {/* select teacher sec A */}
@@ -99,9 +112,10 @@ const AddCourse = () => {
                 </label>
                 <select
                   className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                  {...register("sectionA")}
+                  {...register("sectionA", { required: true })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Teacher Sec-A
                   </option>
                   <option>Momin</option>
@@ -121,8 +135,9 @@ const AddCourse = () => {
                   {...register("sectionB", {
                     required: true,
                   })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Teacher Sec-B
                   </option>
                   <option>Momin</option>
@@ -209,8 +224,9 @@ const AddCourse = () => {
                   {...register("credit", {
                     required: true,
                   })}
+                  defaultValue=""
                 >
-                  <option disabled selected className="text-gray-100">
+                  <option disabled value="" className="text-gray-100">
                     Select Credit
                   </option>
                   <option>1</option>

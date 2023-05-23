@@ -8,7 +8,7 @@ const Sidebar = () => {
   const { logout, user } = useContext(AuthContext);
   const navigate = useNavigate();
   const location = useLocation();
-  console.log(location);
+  // console.log(location);
   const handleLogOut = () => {
     logout()
       .then(() => {
