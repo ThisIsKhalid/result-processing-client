@@ -64,7 +64,6 @@ const AddNewResult = () => {
                 </option>
                 <option>A</option>
                 <option>B</option>
-                <option>C</option>
               </select>
             </div>
             {/* Session------------ */}
@@ -80,10 +79,11 @@ const AddNewResult = () => {
                 <option disabled value="" className="text-gray-100">
                   Select Session
                 </option>
-                <option>2019</option>
-                <option>2020</option>
-                <option>2021</option>
-                <option>2022</option>
+                <option>2015-2016</option>
+                <option>2016-2017</option>
+                <option>2017-2018</option>
+                <option>2018-2019</option>
+                <option>2019-2020</option>
               </select>
             </div>
             {/* course------------ */}
@@ -99,9 +99,14 @@ const AddNewResult = () => {
                 <option disabled value="" className="text-gray-100">
                   Select Course
                 </option>
-                <option>Chemistry</option>
-                <option>Physics</option>
-                <option>Biology</option>
+                <option>Information System Analysis and Design</option>
+                <option>Database Management System Lab</option>
+                <option>Database Management System</option>
+                <option>Wireless Communication Lab</option>
+                <option>Wireless Communication</option>
+                <option>Microprocessor Lab</option>
+                <option>Computer Architecture and Microprocessor</option>
+                <option>Artificial Intelligence and Neural Computing</option>
               </select>
             </div>
           </div>

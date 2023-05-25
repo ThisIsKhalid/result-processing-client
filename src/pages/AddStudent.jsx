@@ -90,6 +90,7 @@ const AddStudent = () => {
               <option>2016-2017</option>
               <option>2017-2018</option>
               <option>2018-2019</option>
+              <option>2019-2020</option>
             </select>
           </div>
           {/* Semister------------ */}

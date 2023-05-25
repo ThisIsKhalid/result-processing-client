@@ -48,7 +48,6 @@ const ResultList = () => {
                   </option>
                   <option>A</option>
                   <option>B</option>
-                  <option>C</option>
                 </select>
               </div>
               {/* Session------------ */}
@@ -64,10 +63,11 @@ const ResultList = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Session
                   </option>
-                  <option>2019</option>
-                  <option>2020</option>
-                  <option>2021</option>
-                  <option>2022</option>
+                  <option>2015-2016</option>
+                  <option>2016-2017</option>
+                  <option>2017-2018</option>
+                  <option>2018-2019</option>
+                  <option>2019-2020</option>
                 </select>
               </div>
               {/* course------------ */}
@@ -83,16 +83,21 @@ const ResultList = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Course
                   </option>
-                  <option>Chemistry</option>
-                  <option>Physics</option>
-                  <option>Biology</option>
+                  <option>Information System Analysis and Design</option>
+                  <option>Database Management System Lab</option>
+                  <option>Database Management System</option>
+                  <option>Wireless Communication Lab</option>
+                  <option>Wireless Communication</option>
+                  <option>Microprocessor Lab</option>
+                  <option>Computer Architecture and Microprocessor</option>
+                  <option>Artificial Intelligence and Neural Computing</option>
                 </select>
               </div>
             </div>
 
             <div className="flex justify-center">
               <input
-                className=" bg-teal-400 text-base w-1/2 mt-16 py-3 rounded-3xl font-semibold uppercase"
+                className=" bg-teal-400 text-base w-1/2 mt-16 py-3 rounded-3xl font-semibold uppercase cursor-pointer"
                 type="submit"
                 value="Search"
               />
@@ -162,75 +167,7 @@ const ResultList = () => {
                   className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
                 />
                 <input
-                  className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold"
-                  type="submit"
-                  value="Update"
-                />
-              </form>
-            </div>
-          </div>
-          <div className="mb-5">
-            <div className="h-12 w-full bg-gray-700 rounded-lg flex justify-between items-center px-2 text-base text-gray-50">
-              <h2>Khalid Hasan</h2>
-              <p>18228180531</p>
-              <form
-                onSubmit={handleResultSubmit(editResult)}
-                className="flex gap-5"
-              >
-                {/* written */}
-                <input
-                  type="text"
-                  placeholder="Written"
-                  {...resultRegister("written", {
-                    required: true,
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Please enter only numbers",
-                    },
-                  })}
-                  className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-                />
-                {/* ct-1 */}
-                <input
-                  type="text"
-                  placeholder="CT-1"
-                  {...resultRegister("ct1", {
-                    required: true,
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Please enter only numbers",
-                    },
-                  })}
-                  className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-                />
-                {/* ct-2 */}
-                <input
-                  type="text"
-                  placeholder="CT-2"
-                  {...resultRegister("ct2", {
-                    required: true,
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Please enter only numbers",
-                    },
-                  })}
-                  className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-                />
-                {/* present */}
-                <input
-                  type="text"
-                  placeholder="Present"
-                  {...resultRegister("present", {
-                    required: true,
-                    pattern: {
-                      value: /^[0-9]+$/,
-                      message: "Please enter only numbers",
-                    },
-                  })}
-                  className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md w-28"
-                />
-                <input
-                  className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold"
+                  className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer"
                   type="submit"
                   value="Update"
                 />

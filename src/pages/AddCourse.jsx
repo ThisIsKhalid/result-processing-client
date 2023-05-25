@@ -30,11 +30,14 @@ const AddCourse = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Course
                   </option>
-                  <option>Homer</option>
-                  <option>Marge</option>
-                  <option>Bart</option>
-                  <option>Lisa</option>
-                  <option>Maggie</option>
+                  <option>Information System Analysis and Design</option>
+                  <option>Database Management System Lab</option>
+                  <option>Database Management System</option>
+                  <option>Wireless Communication Lab</option>
+                  <option>Wireless Communication</option>
+                  <option>Microprocessor Lab</option>
+                  <option>Computer Architecture and Microprocessor</option>
+                  <option>Artificial Intelligence and Neural Computing</option>
                 </select>
               </div>
               {/* course code */}
@@ -52,13 +55,17 @@ const AddCourse = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Course Code
                   </option>
-                  <option>419</option>
-                  <option>987</option>
-                  <option>123</option>
-                  <option>546</option>
-                  <option>234</option>
+                  <option>ICE4151</option>
+                  <option>ICE4142</option>
+                  <option>ICE4141</option>
+                  <option>ICE4132</option>
+                  <option>ICE4131</option>
+                  <option>ICE4122</option>
+                  <option>ICE4121</option>
+                  <option>ICE4111</option>
                 </select>
               </div>
+              {/* year */}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text text-sm uppercase">Year</span>
@@ -118,8 +125,9 @@ const AddCourse = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Teacher Sec-A
                   </option>
-                  <option>Momin</option>
-                  <option>Niloy</option>
+                  <option>GR</option>
+                  <option>FA1</option>
+                  <option>FA2</option>
                   <option>none</option>
                 </select>
               </div>
@@ -140,8 +148,9 @@ const AddCourse = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Teacher Sec-B
                   </option>
-                  <option>Momin</option>
-                  <option>Niloy</option>
+                  <option>GR</option>
+                  <option>FA1</option>
+                  <option>FA2</option>
                   <option>none</option>
                 </select>
               </div>
@@ -229,8 +238,8 @@ const AddCourse = () => {
                   <option disabled value="" className="text-gray-100">
                     Select Credit
                   </option>
-                  <option>1</option>
                   <option>1.5</option>
+                  <option>2</option>
                   <option>3</option>
                 </select>
               </div>
