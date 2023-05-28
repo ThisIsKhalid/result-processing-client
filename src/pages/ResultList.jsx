@@ -149,47 +149,57 @@ const ResultList = () => {
             credit,
             course,
           } = result;
-
+          console.log(result);
           const written = parseFloat(writtenSecA) + parseFloat(writtenSecB);
           const ct = parseFloat(ct1) + parseFloat(ct2);
           const sum = written + ct + parseFloat(present);
+          console.log(written, ct, sum, present, credit);
 
           let res;
-          if (credit === "1.5") {
+          if (credit === "3") {
             res = (100 / 75) * sum;
-            // console.log(res);
           } else if (credit === "2") {
-            res = (100 / 75) * sum;
-            // console.log(res1);
-          } else if (credit === "4") {
-            res = (100 / 75) * sum;
-            // console.log(res2);
+            res = (100 / 50) * sum;
+          } else if (credit === '1.5') {
+            res = (100 / 37.5) * sum;
           }
-          const total = parseFloat(res.toFixed(2));
+          const total = res;
+          // console.log(total);
 
           let grade;
+          let cgpa;
           if (total >= 80.0) {
             grade = "A+";
+            cgpa = 4.0;
           } else if (total >= 75.0) {
             grade = "A";
+            cgpa = 3.75;
           } else if (total >= 70.0) {
             grade = "A-";
+            cgpa = 3.5;
           } else if (total >= 65.0) {
             grade = "B+";
+            cgpa = 3.25;
           } else if (total >= 60.0) {
             grade = "B";
+            cgpa = 3.0;
           } else if (total >= 55.0) {
             grade = "B-";
+            cgpa = 2.75;
           } else if (total >= 50.0) {
             grade = "C+";
+            cgpa = 2.5;
           } else if (total >= 45.0) {
-            grade = "C-";
+            grade = "C";
+            cgpa = 2.25;
           } else if (total >= 40.0) {
             grade = "D";
+            cgpa = 2.0;
           } else {
             grade = "F";
+            cgpa = 0.0;
           }
-          // console.log(total, grade);
+          console.log(total, grade, cgpa);
 
           return (
             <div
@@ -289,7 +299,10 @@ const ResultList = () => {
                 </div>
                 <div className="col-span-4 flex justify-between items-center">
                   <p className="text-base flex items-center gap-1">
-                    Total : <span className="text-orange-400 font-bold text-xl">{grade}</span>
+                    Total :{" "}
+                    <span className="text-orange-400  text-xl">
+                      {cgpa} ({grade})
+                    </span>
                   </p>
                   <button
                     className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer"

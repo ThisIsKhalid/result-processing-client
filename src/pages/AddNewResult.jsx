@@ -8,6 +8,63 @@ const AddNewResult = () => {
   const { register: searchRegister, handleSubmit: handleSearchSubmit } =
     useForm();
 
+  // State for selected credit and corresponding max values
+  // const [selectedCredit, setSelectedCredit] = useState("");
+  const [maxValues, setMaxValues] = useState({
+    writtenSecA: 0,
+    writtenSecB: 0,
+    ct1: 0,
+    ct2: 0,
+    present: 0,
+  });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  // Handle credit selection---------------------
+  const handleCreditSelect = (event) => {
+    const selectedCredit = event.target.value;
+    // setSelectedCredit(selectedCredit);
+
+    // Update max values based on selected credit
+    let newMaxValues = {};
+    if (selectedCredit === "3") {
+      newMaxValues = {
+        writtenSecA: 26.25,
+        writtenSecB: 26.25,
+        ct1: 7.5,
+        ct2: 7.5,
+        present: 7.5,
+      };
+    } else if (selectedCredit === "2") {
+      newMaxValues = {
+        writtenSecA: 17.5,
+        writtenSecB: 17.5,
+        ct1: 5,
+        ct2: 5,
+        present: 5,
+      };
+    } else if (selectedCredit === "1.5") {
+      newMaxValues = {
+        writtenSecA: 13.125,
+        writtenSecB: 13.125,
+        ct1: 3.75,
+        ct2: 3.75,
+        present: 3.75,
+      };
+    }
+    setMaxValues(newMaxValues);
+    console.log(newMaxValues);
+  };
+  // Handle input change
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    // Check if entered value exceeds the maximum value
+    const parsedValue = parseFloat(value);
+    if (parsedValue > maxValues[name]) {
+      event.target.value = maxValues[name]; // Set value to maximum
+      setErrorMessage(`${name} value cannot exceed ${maxValues[name]}`);
+    }
+  };
+
   const searchStudent = (data) => {
     console.log("Search Form Data:", data);
     // Additional search logic here
@@ -35,9 +92,14 @@ const AddNewResult = () => {
       ct2,
       present,
       course,
-      credit
+      credit,
     };
-    // console.log(data);
+    console.log(data);
+    // // Check if there are any error messages
+    // if (errorMessage) {
+    //   toast.error("Please fix the errors before submitting.");
+    //   return;
+    // }
     axios
       .post("http://localhost:5000/v1/results/add-result", data)
       .then((res) => {
@@ -46,6 +108,7 @@ const AddNewResult = () => {
           toast.success("Marks Saved Successfully.");
           setSaveRes(data);
           form.reset();
+          setErrorMessage("");
         }
       })
       .catch((error) => {
@@ -215,13 +278,14 @@ const AddNewResult = () => {
                     className="select select-sm bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                     defaultValue=""
                     required
+                    onChange={handleCreditSelect}
                   >
                     <option disabled value="" className="text-gray-100">
                       Select Credit
                     </option>
-                    <option>1.5</option>
-                    <option>2</option>
-                    <option>3</option>
+                    <option value="3">3</option>
+                    <option value="2">2</option>
+                    <option value="1.5">1.5</option>
                   </select>
                   <button
                     className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer"
@@ -230,47 +294,71 @@ const AddNewResult = () => {
                     Save
                   </button>
 
-                  <div className="flex  justify-between col-span-5">
-                    {/* written */}
+                  <div className="flex justify-between col-span-5">
+                    {/* writtenSecA */}
                     <input
-                      type="text"
+                      type="number"
+                      inputMode="numeric"
+                      step="0.001"
                       name="writtenSecA"
                       required
                       placeholder="Written secA"
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                      max={maxValues.writtenSecA}
+                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md appearance-none"
+                      onChange={handleInputChange}
                     />
+                    {/* writtenSecB */}
                     <input
-                      type="text"
+                      type="number"
+                      inputMode="numeric"
+                      step="0.001"
                       name="writtenSecB"
                       required
                       placeholder="Written secB"
+                      max={maxValues.writtenSecB}
                       className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                      onChange={handleInputChange}
                     />
                     {/* ct-1 */}
                     <input
-                      type="text"
+                      type="number"
+                      inputMode="numeric"
+                      step="0.001"
                       name="ct1"
                       required
                       placeholder="CT-1"
+                      max={maxValues.ct1}
                       className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                      onChange={handleInputChange}
                     />
                     {/* ct-2 */}
                     <input
-                      type="text"
+                      type="number"
+                      inputMode="numeric"
+                      step="0.001"
                       name="ct2"
                       required
                       placeholder="CT-2"
+                      max={maxValues.ct2}
                       className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                      onChange={handleInputChange}
                     />
                     {/* present */}
                     <input
-                      type="text"
+                      type="number"
+                      inputMode="numeric"
+                      step="0.001"
                       name="present"
                       required
                       placeholder="Present"
+                      max={maxValues.present}
                       className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                      onChange={handleInputChange}
                     />
                   </div>
+                  {errorMessage && (
+                    <p className="text-red-500">{errorMessage}</p>
+                  )}
                 </form>
               </div>
             );
