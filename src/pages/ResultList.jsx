@@ -47,7 +47,7 @@ const ResultList = () => {
       })
       .catch((err) => console.log(err));
   }, []);
-  console.log(results);
+  // console.log(results);
 
   return (
     <section className="py-10 px-10">

@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 
 const AddCourse = () => {
@@ -11,9 +12,16 @@ const AddCourse = () => {
      
     return (
       <section className="py-10 px-10">
-        <h1 className="text-4xl text-gray-800 font-semibold">
-          Add New Course :
-        </h1>
+        <div className="flex items-end justify-between">
+          <h1 className="text-4xl text-gray-800 font-semibold">
+            Add New Course :
+          </h1>
+          <Link to="/dashboard/courses">
+            <h3 className="text-xl text-blue-700 underline underline-offset-4 cursor-pointer hover:text-orange-500">
+              Course List
+            </h3>
+          </Link>
+        </div>
         <div className="mt-14">
           <form onSubmit={handleSubmit(fromSubmit)}>
             <div className="grid grid-cols-3 gap-5">

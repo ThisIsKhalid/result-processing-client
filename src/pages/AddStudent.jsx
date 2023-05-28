@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddStudent = () => {
@@ -27,9 +28,16 @@ const AddStudent = () => {
 
   return (
     <section className="py-10 px-10">
-      <h1 className="text-4xl text-gray-800 font-semibold">
-        Add New Student :
-      </h1>
+      <div className="flex items-end justify-between">
+        <h1 className="text-4xl text-gray-800 font-semibold">
+          Add New Student :
+        </h1>
+        <Link to="/dashboard/students">
+          <h3 className="text-xl text-blue-700 underline underline-offset-4 cursor-pointer hover:text-orange-500">
+            Students List
+          </h3>
+        </Link>
+      </div>
       <div className="mt-14 w-1/2 mx-auto">
         <form onSubmit={handleSubmit(fromSubmit)}>
           {/* Name */}

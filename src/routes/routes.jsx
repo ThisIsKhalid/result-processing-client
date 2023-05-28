@@ -11,6 +11,9 @@ import Courses from "../pages/Courses";
 import PrivateRoute from "./privateRoutes";
 import AddNewResult from "../pages/AddNewResult";
 import ResultList from "../pages/ResultList";
+import TeachersList from "../pages/TeachersList";
+import StudentList from "../pages/StudentList";
+import CourseList from "../pages/CourseList";
 
 const router = createBrowserRouter([
   {
@@ -46,12 +49,24 @@ const router = createBrowserRouter([
         element: <AddStudent />,
       },
       {
+        path: "/dashboard/students",
+        element: <StudentList />,
+      },
+      {
         path: "/dashboard/add-teacher",
         element: <AddTeacher />,
       },
       {
+        path: "/dashboard/teachers",
+        element: <TeachersList />,
+      },
+      {
         path: "/dashboard/add-course",
         element: <AddCourse />,
+      },
+      {
+        path: "/dashboard/courses",
+        element: <CourseList />,
       },
       {
         path: "/dashboard/add-result",
