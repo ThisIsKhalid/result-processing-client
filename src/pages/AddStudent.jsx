@@ -13,7 +13,10 @@ const AddStudent = () => {
 
   const fromSubmit = (data) => {
     axios
-      .post("http://localhost:5000/v1/students/add-student", data)
+      .post(
+        "https://result-processing-server.vercel.app/v1/students/add-student",
+        data
+      )
       .then((res) => {
         // console.log(res.data.data.acknowledged);
         if (res.data.data.acknowledged) {

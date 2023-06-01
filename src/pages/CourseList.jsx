@@ -6,7 +6,7 @@ const CourseList = () => {
   const [courses, setCourses] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/courses")
+      .get("https://result-processing-server.vercel.app/v1/courses")
       .then((res) => {
         setCourses(res.data.data);
       })

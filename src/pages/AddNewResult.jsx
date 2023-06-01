@@ -101,7 +101,10 @@ const AddNewResult = () => {
     //   return;
     // }
     axios
-      .post("http://localhost:5000/v1/results/add-result", data)
+      .post(
+        "https://result-processing-server.vercel.app/v1/results/add-result",
+        data
+      )
       .then((res) => {
         // console.log(res.data.data);
         if (res.data.data.acknowledged) {
@@ -120,7 +123,7 @@ const AddNewResult = () => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/students")
+      .get("https://result-processing-server.vercel.app/v1/students")
       .then((res) => {
         setStudents(res.data.data);
       })
@@ -131,7 +134,7 @@ const AddNewResult = () => {
   const [results, setResults] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/results")
+      .get("https://result-processing-server.vercel.app/v1/results")
       .then((res) => {
         setResults(res.data.data);
       })

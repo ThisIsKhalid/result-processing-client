@@ -6,7 +6,7 @@ const TeachersList = () => {
   const [teachers, setTeachers] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/teachers")
+      .get("https://result-processing-server.vercel.app/v1/teachers")
       .then((res) => {
         setTeachers(res.data.data);
       })
@@ -38,7 +38,7 @@ const TeachersList = () => {
                 <th className="bg-gray-800 text-gray-50">ID</th>
                 <th className="bg-gray-800 text-gray-50">Email</th>
                 <th className="bg-gray-800 text-gray-50">Section</th>
-                
+
                 <th className="bg-gray-800 text-gray-50">Delete</th>
               </tr>
             </thead>
@@ -51,7 +51,7 @@ const TeachersList = () => {
                     <td>{teacher.teacherId}</td>
                     <td>{teacher.email}</td>
                     <td>{teacher.section}</td>
-                    
+
                     <td>
                       <button className="btn btn-sm btn-error">Delete</button>
                     </td>

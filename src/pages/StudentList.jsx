@@ -1,12 +1,12 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const StudentList = () => {
   const [students, setStudents] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/students")
+      .get("https://result-processing-server.vercel.app/v1/students")
       .then((res) => {
         setStudents(res.data.data);
       })
@@ -38,7 +38,7 @@ const StudentList = () => {
                 <th className="bg-gray-800 text-gray-50">ID</th>
                 <th className="bg-gray-800 text-gray-50">Session</th>
                 <th className="bg-gray-800 text-gray-50">Semister</th>
-                
+
                 <th className="bg-gray-800 text-gray-50">Delete</th>
               </tr>
             </thead>
@@ -51,7 +51,7 @@ const StudentList = () => {
                     <td>{teacher.studentId}</td>
                     <td>{teacher.session}</td>
                     <td>{teacher.semister}</td>
-                    
+
                     <td>
                       <button className="btn btn-sm btn-error">Delete</button>
                     </td>

@@ -41,7 +41,7 @@ const ResultList = () => {
   const [results, setResults] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:5000/v1/results")
+      .get("https://result-processing-server.vercel.app/v1/results")
       .then((res) => {
         setResults(res.data.data);
       })
@@ -160,7 +160,7 @@ const ResultList = () => {
             res = (100 / 75) * sum;
           } else if (credit === "2") {
             res = (100 / 50) * sum;
-          } else if (credit === '1.5') {
+          } else if (credit === "1.5") {
             res = (100 / 37.5) * sum;
           }
           const total = res;
