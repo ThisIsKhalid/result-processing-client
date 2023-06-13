@@ -4,24 +4,8 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddNewResult = () => {
-  // filtering by semister
-  const handleSelectChange = (event) => {
-    const semester = event.target.value;
-    console.log("Selected semester:", semester, typeof semester);
-  };
   const [courses, setCourses] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://result-processing-server.vercel.app/v1/courses")
-      .then((res) => {
-        setCourses(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-  console.log(courses);
-
-  // State for selected credit and corresponding max values
-  // const [selectedCredit, setSelectedCredit] = useState("");
+  const [selectedSemester, setSelectedSemester] = useState("1");
   const [maxValues, setMaxValues] = useState({
     writtenSecA: 0,
     writtenSecB: 0,
@@ -31,10 +15,27 @@ const AddNewResult = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
 
-  // Handle credit selection---------------------
+  // filtering by semester
+  const handleSemesterChange = (event) => {
+    const data = event.target.value;
+    setSelectedSemester(data);
+    // console.log(data); // Log the selected value directly
+  };
+
+  useEffect(() => {
+    axios
+      .get("https://result-processing-server.vercel.app/v1/courses")
+      .then((res) => {
+        setCourses(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  // console.log(selectedSemester);
+
+
+  // Handle input change
   const handleCreditSelect = (event) => {
     const selectedCredit = event.target.value;
-    // setSelectedCredit(selectedCredit);
 
     // Update max values based on selected credit
     let newMaxValues = {};
@@ -64,9 +65,9 @@ const AddNewResult = () => {
       };
     }
     setMaxValues(newMaxValues);
-    console.log(newMaxValues);
+    // console.log(newMaxValues);
   };
-  // Handle input change
+
   const handleInputChange = (event) => {
     const { name, value } = event.target;
     // Check if entered value exceeds the maximum value
@@ -102,11 +103,7 @@ const AddNewResult = () => {
       credit,
     };
     console.log(data);
-    // // Check if there are any error messages
-    // if (errorMessage) {
-    //   toast.error("Please fix the errors before submitting.");
-    //   return;
-    // }
+
     axios
       .post(
         "https://result-processing-server.vercel.app/v1/results/add-result",
@@ -126,19 +123,9 @@ const AddNewResult = () => {
       });
   };
 
-  // ----------------get students-------------
-  const [students, setStudents] = useState([]);
-  useEffect(() => {
-    axios
-      .get("https://result-processing-server.vercel.app/v1/students")
-      .then((res) => {
-        setStudents(res.data.data);
-      })
-      .catch((err) => console.log(err));
-  }, [saveRes]);
-  // console.log(students);
-
   const [results, setResults] = useState([]);
+  const [students, setStudents] = useState([]);
+
   useEffect(() => {
     axios
       .get("https://result-processing-server.vercel.app/v1/results")
@@ -146,8 +133,21 @@ const AddNewResult = () => {
         setResults(res.data.data);
       })
       .catch((err) => console.log(err));
+
+    axios
+      .get("https://result-processing-server.vercel.app/v1/students")
+      .then((res) => {
+        setStudents(res.data.data);
+      })
+      .catch((err) => console.log(err));
   }, [saveRes]);
-  // console.log(results);
+  // console.log(results, students);
+
+  const filteredStudents = students.filter(
+    (student) =>
+      student.semester === selectedSemester &&
+      !results.map((res) => res.name).includes(student.name)
+  );
 
   return (
     <section className="py-10 px-10">
@@ -165,7 +165,7 @@ const AddNewResult = () => {
       <div className="mt-14">
         <form>
           <div className="grid grid-cols-3 gap-5">
-            {/* Semister------------ */}
+            {/* Semester------------ */}
             <div className="form-control">
               <label className="label">
                 <span className="label-text text-sm uppercase">Semester</span>
@@ -174,19 +174,19 @@ const AddNewResult = () => {
                 name="semester"
                 className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
                 defaultValue=""
-                onChange={handleSelectChange}
+                onChange={handleSemesterChange}
               >
                 <option disabled value="" className="text-gray-100">
                   Select Semester
                 </option>
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-                <option>6</option>
-                <option>7</option>
-                <option>8</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
               </select>
             </div>
           </div>
@@ -194,135 +194,127 @@ const AddNewResult = () => {
       </div>
 
       <div className="mt-10">
-        {students
-          .filter(
-            (student) => !results.map((res) => res.name).includes(student.name)
-          )
-          .map((student) => {
-            return (
-              <div
-                key={student._id}
-                className=" w-full bg-gray-700 rounded-lg flex flex-col gap-4 px-3 py-3 text-base text-gray-50 mb-5"
+        {filteredStudents.map((student) => {
+          return (
+            <div
+              key={student._id}
+              className=" w-full bg-gray-700 rounded-lg flex flex-col gap-4 px-3 py-3 text-base text-gray-50 mb-5"
+            >
+              <div className="flex justify-between"></div>
+              <form
+                onSubmit={(event) =>
+                  saveResult(event, student.name, student.studentId)
+                }
+                className="grid grid-cols-5 gap-5"
               >
-                <div className="flex justify-between"></div>
-                <form
-                  onSubmit={(event) =>
-                    saveResult(event, student.name, student.studentId)
-                  }
-                  className="grid grid-cols-5 gap-5"
+                <h2 className="w-44 overflow-hidden hover:overflow-visible">
+                  Name : <span className="text-orange-400">{student.name}</span>
+                </h2>
+                <p className="">
+                  Student ID :{" "}
+                  <span className="text-orange-400">{student.studentId}</span>
+                </p>
+                <select
+                  name="course"
+                  className="select select-sm bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
+                  defaultValue=""
+                  required
                 >
-                  <h2 className="w-44 overflow-hidden hover:overflow-visible">
-                    Name :{" "}
-                    <span className="text-orange-400">{student.name}</span>
-                  </h2>
-                  <p className="">
-                    Student ID :{" "}
-                    <span className="text-orange-400">{student.studentId}</span>
-                  </p>
-                  <select
-                    name="course"
-                    className="select select-sm bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                    defaultValue=""
-                    required
-                  >
-                    <option disabled value="" className="text-gray-100">
-                      Select Course
-                    </option>
-                    {courses?.map((course) => (
-                      <option key={course._id}>{course.course}</option>
-                    ))}
-                  </select>
-                  <select
-                    name="credit"
-                    className="select select-sm bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                    defaultValue=""
-                    required
-                    onChange={handleCreditSelect}
-                  >
-                    <option disabled value="" className="text-gray-100">
-                      Select Credit
-                    </option>
-                    <option value="3">3</option>
-                    <option value="2">2</option>
-                    <option value="1.5">1.5</option>
-                  </select>
-                  <button
-                    className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer"
-                    type="submit"
-                  >
-                    Save
-                  </button>
+                  <option disabled value="" className="text-gray-100">
+                    Select Course
+                  </option>
+                  {courses?.map((course) => (
+                    <option key={course._id}>{course.course}</option>
+                  ))}
+                </select>
+                <select
+                  name="credit"
+                  className="select select-sm bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
+                  defaultValue=""
+                  required
+                  onChange={handleCreditSelect}
+                >
+                  <option disabled value="" className="text-gray-100">
+                    Select Credit
+                  </option>
+                  <option value="3">3</option>
+                  <option value="2">2</option>
+                  <option value="1.5">1.5</option>
+                </select>
+                <button
+                  className="text-base px-5 bg-teal-400 rounded-md text-gray-800 font-semibold cursor-pointer h-9"
+                  type="submit"
+                >
+                  Save
+                </button>
 
-                  <div className="flex justify-between col-span-5">
-                    {/* writtenSecA */}
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      step="0.001"
-                      name="writtenSecA"
-                      required
-                      placeholder="Written secA"
-                      max={maxValues.writtenSecA}
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md appearance-none"
-                      onChange={handleInputChange}
-                    />
-                    {/* writtenSecB */}
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      step="0.001"
-                      name="writtenSecB"
-                      required
-                      placeholder="Written secB"
-                      max={maxValues.writtenSecB}
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
-                      onChange={handleInputChange}
-                    />
-                    {/* ct-1 */}
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      step="0.001"
-                      name="ct1"
-                      required
-                      placeholder="CT-1"
-                      max={maxValues.ct1}
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
-                      onChange={handleInputChange}
-                    />
-                    {/* ct-2 */}
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      step="0.001"
-                      name="ct2"
-                      required
-                      placeholder="CT-2"
-                      max={maxValues.ct2}
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
-                      onChange={handleInputChange}
-                    />
-                    {/* present */}
-                    <input
-                      type="number"
-                      inputMode="numeric"
-                      step="0.001"
-                      name="present"
-                      required
-                      placeholder="Present"
-                      max={maxValues.present}
-                      className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
-                      onChange={handleInputChange}
-                    />
-                  </div>
-                  {errorMessage && (
-                    <p className="text-red-500">{errorMessage}</p>
-                  )}
-                </form>
-              </div>
-            );
-          })}
-        {/* {students?.map()} */}
+                <div className="flex justify-between col-span-5">
+                  {/* writtenSecA */}
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    step="0.001"
+                    name="writtenSecA"
+                    required
+                    placeholder="Written secA"
+                    max={maxValues.writtenSecA}
+                    className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md appearance-none"
+                    onChange={handleInputChange}
+                  />
+                  {/* writtenSecB */}
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    step="0.001"
+                    name="writtenSecB"
+                    required
+                    placeholder="Written secB"
+                    max={maxValues.writtenSecB}
+                    className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                    onChange={handleInputChange}
+                  />
+                  {/* ct-1 */}
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    step="0.001"
+                    name="ct1"
+                    required
+                    placeholder="CT-1"
+                    max={maxValues.ct1}
+                    className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                    onChange={handleInputChange}
+                  />
+                  {/* ct-2 */}
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    step="0.001"
+                    name="ct2"
+                    required
+                    placeholder="CT-2"
+                    max={maxValues.ct2}
+                    className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                    onChange={handleInputChange}
+                  />
+                  {/* present */}
+                  <input
+                    type="number"
+                    inputMode="numeric"
+                    step="0.001"
+                    name="present"
+                    required
+                    placeholder="Present"
+                    max={maxValues.present}
+                    className="bg-gray-100 focus:bg-gray-100 text-gray-800 outline-none focus:outline-orange-500 input-sm border-none rounded-md "
+                    onChange={handleInputChange}
+                  />
+                </div>
+                {errorMessage && <p className="text-red-500">{errorMessage}</p>}
+              </form>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

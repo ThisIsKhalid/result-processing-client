@@ -34,7 +34,7 @@ const CourseList = () => {
             ctMarks,
             sectionA,
             sectionB,
-            semister,
+            semester,
             writtenMarks,
             year,
           } = cr;
@@ -56,8 +56,8 @@ const CourseList = () => {
                       <span className="text-red-400 text-lg"> {credit}</span>
                     </p>
                     <p>
-                      Semister :{" "}
-                      <span className="text-red-400 text-lg"> {semister}</span>
+                      Semester :{" "}
+                      <span className="text-red-400 text-lg"> {semester}</span>
                     </p>
                     <p>
                       Year :{" "}

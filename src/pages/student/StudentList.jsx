@@ -37,7 +37,7 @@ const StudentList = () => {
                 <th className="bg-gray-800 text-gray-50">Name</th>
                 <th className="bg-gray-800 text-gray-50">ID</th>
                 <th className="bg-gray-800 text-gray-50">Session</th>
-                <th className="bg-gray-800 text-gray-50">Semister</th>
+                <th className="bg-gray-800 text-gray-50">Semester</th>
 
                 <th className="bg-gray-800 text-gray-50">Delete</th>
               </tr>
@@ -50,7 +50,7 @@ const StudentList = () => {
                     <th>{teacher.name}</th>
                     <td>{teacher.studentId}</td>
                     <td>{teacher.session}</td>
-                    <td>{teacher.semister}</td>
+                    <td>{teacher.semester}</td>
 
                     <td>
                       <button className="btn btn-sm btn-error">Delete</button>

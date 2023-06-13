@@ -85,18 +85,18 @@ const AddCourse = () => {
                 <option>2022</option>
               </select>
             </div>
-            {/* semister */}
+            {/* semester */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-sm uppercase">Semister</span>
+                <span className="label-text text-sm uppercase">Semester</span>
               </label>
               <select
                 className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                {...register("semister", { required: true })}
+                {...register("semester", { required: true })}
                 defaultValue=""
               >
                 <option disabled value="" className="text-gray-100">
-                  Select Semister
+                  Select Semester
                 </option>
                 <option>1</option>
                 <option>2</option>
