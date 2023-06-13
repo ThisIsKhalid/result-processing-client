@@ -1,12 +1,24 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
 const AddNewResult = () => {
-  const { register: searchRegister, handleSubmit: handleSearchSubmit } =
-    useForm();
+  // filtering by semister
+  const handleSelectChange = (event) => {
+    const semester = event.target.value;
+    console.log("Selected semester:", semester, typeof semester);
+  };
+  const [courses, setCourses] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://result-processing-server.vercel.app/v1/courses")
+      .then((res) => {
+        setCourses(res.data.data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+  console.log(courses);
 
   // State for selected credit and corresponding max values
   // const [selectedCredit, setSelectedCredit] = useState("");
@@ -63,11 +75,6 @@ const AddNewResult = () => {
       event.target.value = maxValues[name]; // Set value to maximum
       setErrorMessage(`${name} value cannot exceed ${maxValues[name]}`);
     }
-  };
-
-  const searchStudent = (data) => {
-    console.log("Search Form Data:", data);
-    // Additional search logic here
   };
 
   const [saveRes, setSaveRes] = useState({});
@@ -156,76 +163,32 @@ const AddNewResult = () => {
       </div>
 
       <div className="mt-14">
-        <form onSubmit={handleSearchSubmit(searchStudent)}>
+        <form>
           <div className="grid grid-cols-3 gap-5">
-            {/* Section------------ */}
+            {/* Semister------------ */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text text-sm uppercase">Section</span>
+                <span className="label-text text-sm uppercase">Semester</span>
               </label>
               <select
+                name="semester"
                 className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                {...searchRegister("section")}
                 defaultValue=""
+                onChange={handleSelectChange}
               >
                 <option disabled value="" className="text-gray-100">
-                  Select Section
+                  Select Semester
                 </option>
-                <option>A</option>
-                <option>B</option>
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>4</option>
+                <option>5</option>
+                <option>6</option>
+                <option>7</option>
+                <option>8</option>
               </select>
             </div>
-            {/* Session------------ */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text text-sm uppercase">Session</span>
-              </label>
-              <select
-                className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                {...searchRegister("session")}
-                defaultValue=""
-              >
-                <option disabled value="" className="text-gray-100">
-                  Select Session
-                </option>
-                <option>2015-2016</option>
-                <option>2016-2017</option>
-                <option>2017-2018</option>
-                <option>2018-2019</option>
-                <option>2019-2020</option>
-              </select>
-            </div>
-            {/* course------------ */}
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text text-sm uppercase">Course</span>
-              </label>
-              <select
-                className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-                {...searchRegister("course")}
-                defaultValue=""
-              >
-                <option disabled value="" className="text-gray-100">
-                  Select Course
-                </option>
-                <option>Information System Analysis and Design</option>
-                <option>Database Management System Lab</option>
-                <option>Database Management System</option>
-                <option>Wireless Communication Lab</option>
-                <option>Wireless Communication</option>
-                <option>Microprocessor Lab</option>
-                <option>Computer Architecture and Microprocessor</option>
-                <option>Artificial Intelligence and Neural Computing</option>
-              </select>
-            </div>
-          </div>
-
-          <div className="flex justify-center">
-            <input
-              className=" bg-teal-400 text-base w-1/2 mt-16 py-3 rounded-3xl font-semibold uppercase"
-              type="submit"
-              value="Search"
-            />
           </div>
         </form>
       </div>
@@ -265,16 +228,9 @@ const AddNewResult = () => {
                     <option disabled value="" className="text-gray-100">
                       Select Course
                     </option>
-                    <option>Information System Analysis and Design</option>
-                    <option>Database Management System Lab</option>
-                    <option>Database Management System</option>
-                    <option>Wireless Communication Lab</option>
-                    <option>Wireless Communication</option>
-                    <option>Microprocessor Lab</option>
-                    <option>Computer Architecture and Microprocessor</option>
-                    <option>
-                      Artificial Intelligence and Neural Computing
-                    </option>
+                    {courses?.map((course) => (
+                      <option key={course._id}>{course.course}</option>
+                    ))}
                   </select>
                   <select
                     name="credit"

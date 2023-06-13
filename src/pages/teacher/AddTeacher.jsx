@@ -106,24 +106,6 @@ const AddTeacher = () => {
             )}
           </div>
 
-          {/* Section------------ */}
-          <div className="form-control">
-            <label className="label">
-              <span className="label-text text-sm uppercase">Section</span>
-            </label>
-            <select
-              className="select w-full bg-gray-700 text-gray-50 text-base outline focus:outline-orange-500"
-              {...register("section", { required: true })}
-              defaultValue=""
-            >
-              <option disabled value="" className="text-gray-100">
-                Select Section
-              </option>
-              <option>Sec-A</option>
-              <option>Sec-B</option>
-            </select>
-          </div>
-
           <input
             className="btn bg-teal-400 text-base w-full mt-10"
             type="submit"
