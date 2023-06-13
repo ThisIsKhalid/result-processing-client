@@ -2,7 +2,6 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-
 const useDataFetch = (url) => {
   const [data, setData] = useState([]);
 
@@ -18,12 +17,19 @@ const useDataFetch = (url) => {
   return data;
 };
 
-
 const DashboardHome = () => {
-  const teachers = useDataFetch("http://localhost:5000/v1/teachers");
-  const students = useDataFetch("http://localhost:5000/v1/students");
-  const courses = useDataFetch("http://localhost:5000/v1/courses");
-  const results = useDataFetch("http://localhost:5000/v1/results");
+  const teachers = useDataFetch(
+    "https://result-processing-server.vercel.app/v1/teachers"
+  );
+  const students = useDataFetch(
+    "https://result-processing-server.vercel.app/v1/students"
+  );
+  const courses = useDataFetch(
+    "https://result-processing-server.vercel.app/v1/courses"
+  );
+  const results = useDataFetch(
+    "https://result-processing-server.vercel.app/v1/results"
+  );
 
   const teachersLength = teachers.length;
   const studentsLength = students.length;

@@ -1,33 +1,40 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AuthContext } from "../context/AuthProvider";
+import { AuthContext } from "../../context/AuthProvider";
 
-const SignIn = () => {
-  const { signIn } = useContext(AuthContext);
+const SignUp = () => {
+  const { createUser, updateUserProfile } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
 
-  const from = location.state?.from?.pathname || "/";
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
   const handleRegister = (data, event) => {
     event.preventDefault();
-    const { email, password } = data;
-
-    signIn(email, password)
+    const { email, password, name } = data;
+    // ----------create user
+    createUser(email, password)
       .then(() => {
-        toast.success("Thanks for coming back!!");
-        navigate(from, { replace: true });
+        // ------------update user
+        updateUserProfile({
+          displayName: name,
+        })
+          .then(() => {
+            toast.success("Welcome to Result Hub");
+            reset();
+            navigate("/");
+          })
+          .catch((err) => {
+            toast.error(err.message);
+          });
       })
-      .catch((err) => {
-        toast.error(err.message);
-      });
+      .catch((err) => toast.error(err.message));
   };
 
   return (
@@ -42,8 +49,18 @@ const SignIn = () => {
       </div>
       <div className="flex items-center justify-center mt-10">
         <div className="w-96 p-7 shadow-md border border-gray-100 rounded-lg bg-gray-800">
-          <h2 className="text-xl text-center text-gray-50">Sign In</h2>
+          <h2 className="text-xl text-center text-gray-50">Register</h2>
           <form onSubmit={handleSubmit(handleRegister)}>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text text-gray-50">Name</span>
+              </label>
+              <input
+                type="text"
+                {...register("name", { required: true })}
+                className="input input-bordered w-full max-w-xs"
+              />
+            </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text text-gray-50">Email</span>
@@ -59,7 +76,21 @@ const SignIn = () => {
                 <p className="text-red-600">{errors.email?.message}</p>
               )}
             </div>
-
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text text-gray-50">Teacher ID</span>
+              </label>
+              <input
+                type="text"
+                {...register("teacherId", {
+                  required: "Teacher ID is required",
+                })}
+                className="input input-bordered w-full max-w-xs"
+              />
+              {errors.email && (
+                <p className="text-red-600">{errors.email?.message}</p>
+              )}
+            </div>
             <div className="form-control w-full max-w-xs">
               <label className="label">
                 <span className="label-text text-gray-50">Password</span>
@@ -83,14 +114,14 @@ const SignIn = () => {
             <input
               className="btn btn-primary w-full max-w-xs mt-5"
               type="submit"
-              value="Sign In"
+              value="Register"
             />
           </form>
           <p className="mt-5 text-center text-gray-50">
             Already have an account?{" "}
-            <Link to="/signup" className="text-blue-500">
+            <Link to="/signin" className="text-blue-500">
               {" "}
-              Signup
+              Signin
             </Link>
           </p>
           <p className="text-slate-300 underline text-center mt-2 text-sm">
@@ -102,4 +133,4 @@ const SignIn = () => {
   );
 };
 
-export default SignIn;
+export default SignUp;

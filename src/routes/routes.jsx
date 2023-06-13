@@ -1,19 +1,18 @@
 import { createBrowserRouter } from "react-router-dom";
 import DashboardLayout from "../layout/DashboardLayout";
-import AddCourse from "../pages/AddCourse";
-import DashboardHome from "../pages/DashboardHome";
-import Home from "../pages/Home";
-import SignIn from "../pages/SignIn";
-import SignUp from "../pages/SignUp";
-import AddStudent from "../pages/AddStudent";
-import AddTeacher from "../pages/AddTeacher";
-import Courses from "../pages/Courses";
+import Home from "../pages/home/Home";
+import SignIn from "../pages/login/SignIn";
+import SignUp from "../pages/login/SignUp";
 import PrivateRoute from "./privateRoutes";
-import AddNewResult from "../pages/AddNewResult";
-import ResultList from "../pages/ResultList";
-import TeachersList from "../pages/TeachersList";
-import StudentList from "../pages/StudentList";
-import CourseList from "../pages/CourseList";
+import DashboardHome from "../pages/home/DashboardHome";
+import AddStudent from "../pages/student/AddStudent";
+import StudentList from "../pages/student/StudentList";
+import AddTeacher from "../pages/teacher/AddTeacher";
+import TeachersList from "../pages/teacher/TeachersList";
+import AddCourse from "../pages/courses/AddCourse";
+import CourseList from "../pages/courses/CourseList";
+import AddNewResult from "../pages/result/AddNewResult";
+import ResultList from "../pages/result/ResultList";
 
 const router = createBrowserRouter([
   {
@@ -75,10 +74,6 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/results",
         element: <ResultList />,
-      },
-      {
-        path: "/dashboard/courses",
-        element: <Courses />,
       },
     ],
   },
